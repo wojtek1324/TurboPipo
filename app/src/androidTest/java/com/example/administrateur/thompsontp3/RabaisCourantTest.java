@@ -54,11 +54,21 @@ public class RabaisCourantTest extends AndroidTestCase{
             fail();
         } catch (RabaisCourant.ItemPasDansLaListe ItemPasDansLaListe)
         {
-
         }
-
     }
 
+    public void testSeuilTaxTropPetit(){
+        try {
+            rabaisCourantTests.setSeuilPasDeTaxes(0);
+            fail();
+        }catch(IllegalArgumentException e){
+        }
+    }
 
-
+    public void testTrancheProduitGratuiTropPetit(){
+        try{
+            rabaisCourantTests.setTranchesProduitGratuit(0);
+        }catch(IllegalArgumentException e){
+        }
+    }
 }

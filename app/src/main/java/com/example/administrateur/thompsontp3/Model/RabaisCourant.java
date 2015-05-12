@@ -59,7 +59,7 @@ public class RabaisCourant {
     }
 
     public void setSeuilPasDeTaxes(int pseuilPasDeTaxes) {
-        if(pseuilPasDeTaxes < 0) { throw new IllegalArgumentException(); }
+        if(pseuilPasDeTaxes <= 0) { throw new IllegalArgumentException(); }
         this.seuilPasDeTaxes = pseuilPasDeTaxes;
     }
 
