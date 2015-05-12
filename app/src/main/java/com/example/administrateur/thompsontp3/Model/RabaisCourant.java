@@ -14,7 +14,13 @@ public class RabaisCourant {
 
     public static  class ItemPasDansLaListe extends Exception {}
 
+    int seuilPasDeTaxes;
+
     private List<AchatItem> list2Pour1;
+
+    private AchatItem produitGratuit;
+
+    private double TranchesProduitGratuit;
 
     public RabaisCourant()
     {
@@ -47,6 +53,33 @@ public class RabaisCourant {
         throw new ItemPasDansLaListe();
     }
 
+
+    public int getSeuilPasDeTaxes() {
+        return seuilPasDeTaxes;
+    }
+
+    public void setSeuilPasDeTaxes(int pseuilPasDeTaxes) {
+        if(pseuilPasDeTaxes < 0) { throw new IllegalArgumentException(); }
+        this.seuilPasDeTaxes = pseuilPasDeTaxes;
+    }
+
+
+    public AchatItem getProduitGratuit() {
+        return produitGratuit;
+    }
+
+    public void setProduitGratuit(AchatItem produitGratuit) {
+        this.produitGratuit = produitGratuit;
+    }
+
+    public double getTranchesProduitGratuit() {
+        return TranchesProduitGratuit;
+    }
+
+    public void setTranchesProduitGratuit(double tranchesProduitGratuit) {
+        if(tranchesProduitGratuit <= 0) { throw new IllegalArgumentException(); }
+        TranchesProduitGratuit = tranchesProduitGratuit;
+    }
 
 
 }
