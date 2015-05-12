@@ -7,7 +7,7 @@ public class AchatItem {
 
     public AchatItem()
     {
-
+        taxable = true;
     }
 
     public AchatItem(String nom, double pPrix, String pcodeBarre)
@@ -15,6 +15,15 @@ public class AchatItem {
         produit = nom;
         prix = pPrix;
         codeBarre = pcodeBarre;
+        taxable = true;
+    }
+
+    public AchatItem(String nom, double pPrix, String pcodeBarre, boolean ptaxable)
+    {
+        produit = nom;
+        prix = pPrix;
+        codeBarre = pcodeBarre;
+        taxable = ptaxable;
     }
 
     public String produit;
@@ -31,4 +40,6 @@ public class AchatItem {
     }
 
     public void setId(long id) {this.id = id; }
+
+    public boolean taxable;
 }

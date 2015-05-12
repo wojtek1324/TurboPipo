@@ -28,5 +28,4 @@ public class TransactionItem {
     public Long id;
 
 
-
 }
