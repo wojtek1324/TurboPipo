@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class ServicePrixTotal {
 
-    private List<TransactionItem> listPourCalcul;
+    public List<TransactionItem> listPourCalcul;
     private RabaisCourant rabaisCourant;
     public TransactionItem produitsGratuit;
 
@@ -49,17 +49,20 @@ public class ServicePrixTotal {
         {
             TransactionItem transactionItem = transactionContient(itemAchat);
             int index = listPourCalcul.indexOf(transactionItem);
-            int quantitee = transactionItem.quantity;
-            if(transactionItem != null)
+            if(index != -1)
             {
-                if(quantitee % 2 == 1)
+                int quantitee = transactionItem.quantity;
+                if(transactionItem != null)
                 {
-                    quantitee /= 2;
-                    quantitee++;
-                } else {
-                    quantitee /= 2;
+                    if(quantitee % 2 == 1)
+                    {
+                        quantitee /= 2;
+                        quantitee++;
+                    } else {
+                        quantitee /= 2;
+                    }
+                    listPourCalcul.get(index).quantity = quantitee;
                 }
-                listPourCalcul.get(index).quantity = quantitee;
             }
         }
 
