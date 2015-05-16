@@ -112,6 +112,7 @@ public class ThompsonMainActivity extends ActionBarActivity {
         if (scanResult != null) {
             serviceProduit.scan(items, scanResult.getContents());
             adapter.notifyDataSetChanged();
+            calculerPrixTotal();
         }
     }
 
@@ -203,6 +204,7 @@ public class ThompsonMainActivity extends ActionBarActivity {
             listItems.deleteAll();
             adapter.clear();
             adapter.notifyDataSetChanged();
+            calculerPrixTotal();
             return true;
         }
 
@@ -215,6 +217,7 @@ public class ThompsonMainActivity extends ActionBarActivity {
 
             adapter.clear();
             adapter.notifyDataSetChanged();
+            calculerPrixTotal();
 
 
             int taille = listItems.getAll().size();
@@ -246,6 +249,7 @@ public class ThompsonMainActivity extends ActionBarActivity {
                 adapter.add(new TransactionItem(itemRandom, random.nextInt(10) + 1));
             }
             adapter.notifyDataSetChanged();
+            calculerPrixTotal();
 
             return true;
         }
