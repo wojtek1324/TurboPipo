@@ -12,7 +12,7 @@
 
         <EditText
             android:id="@+id/nom"
-            android:hint="Nom du produit"
+            android:hint="@string/dialogue_hint_nom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -24,7 +24,7 @@
 
         <EditText
             android:id="@+id/prixProduit"
-            android:hint="Prix"
+            android:hint="@string/dialogue_hint_prix"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -33,7 +33,7 @@
 
         <EditText
             android:id="@+id/code"
-            android:hint="Code barre"
+            android:hint="@string/dialogue_hint_codebarre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10" >
@@ -44,7 +44,7 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add" />
+            android:text="@string/dialogue_bouton_ajout" />
     </LinearLayout>
 
 </LinearLayout>

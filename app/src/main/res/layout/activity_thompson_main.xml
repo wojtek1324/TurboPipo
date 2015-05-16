@@ -23,7 +23,7 @@
             android:id="@+id/plusProduit"
             android:layout_height="40sp"
             android:layout_width="wrap_content"
-            android:text="+Produit"
+            android:text="@string/main_bouton_plusproduit"
             android:layout_margin="10sp"
             />
 
@@ -36,7 +36,7 @@
             android:id="@+id/payer"
             android:layout_height="40sp"
             android:layout_width="wrap_content"
-            android:text="Payer"
+            android:text="@string/main_bouton_payer"
             android:layout_margin="10sp"
             />
 

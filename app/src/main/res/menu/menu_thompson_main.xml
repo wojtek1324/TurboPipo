@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".ThompsonMainActivity">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
-    <item android:id="@+id/creerProduit" android:title="Créer produits" android:orderInCategory="101"
+    <item android:id="@+id/creerProduit" android:title="@string/menu_creer_produits" android:orderInCategory="101"
         app:showAsAction="never"/>
-    <item android:id="@+id/viderProduits" android:title="Vider produits" android:orderInCategory="102"
+    <item android:id="@+id/viderProduits" android:title="@string/menu_vider_produit" android:orderInCategory="102"
         app:showAsAction="never"/>
-    <item android:id="@+id/creerCommande" android:title="Créer commande" android:orderInCategory="103"
+    <item android:id="@+id/creerCommande" android:title="@string/menu_creer_commande" android:orderInCategory="103"
         app:showAsAction="never"/>
 </menu>
