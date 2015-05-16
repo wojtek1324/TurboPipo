@@ -14,7 +14,7 @@ public class RabaisCourant {
 
     public static  class ItemPasDansLaListe extends Exception {}
 
-    int seuilPasDeTaxes;
+    double seuilPasDeTaxes;
 
     private List<AchatItem> list2Pour1;
 
@@ -25,6 +25,8 @@ public class RabaisCourant {
     public RabaisCourant()
     {
         list2Pour1 = new ArrayList<AchatItem>();
+        TranchesProduitGratuit = -1;
+        seuilPasDeTaxes = -1;
     }
 
 
@@ -54,11 +56,11 @@ public class RabaisCourant {
     }
 
 
-    public int getSeuilPasDeTaxes() {
+    public double getSeuilPasDeTaxes() {
         return seuilPasDeTaxes;
     }
 
-    public void setSeuilPasDeTaxes(int pseuilPasDeTaxes) {
+    public void setSeuilPasDeTaxes(double pseuilPasDeTaxes) {
         if(pseuilPasDeTaxes <= 0) { throw new IllegalArgumentException(); }
         this.seuilPasDeTaxes = pseuilPasDeTaxes;
     }

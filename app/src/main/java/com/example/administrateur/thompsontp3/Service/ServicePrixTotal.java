@@ -14,6 +14,7 @@ public class ServicePrixTotal {
 
     private List<TransactionItem> listPourCalcul;
     private RabaisCourant rabaisCourant;
+    public TransactionItem produitsGratuit;
 
     public ServicePrixTotal(Transaction pTransaction, RabaisCourant pRabaisCourant)
     {
@@ -21,51 +22,100 @@ public class ServicePrixTotal {
         this.rabaisCourant = pRabaisCourant;
     }
 
-    public static Transaction AppliquerRabaisEtTaxes(Transaction pTransaction, RabaisCourant pRabaisCourant)
+    public Transaction AppliquerRabaisEtTaxes(Transaction pTransaction)
     {
+        calculer2Pour1(rabaisCourant);
+        double prixAvantTaxes = 0;
+        for(TransactionItem itemTransaction : listPourCalcul)
+        {
+            prixAvantTaxes += itemTransaction.quantity * itemTransaction.achatItem.prix;
+        }
+        double prixApresTaxes = prixAvantTaxes;
+        if(!prixAuDelaDuSeuilExemptionTaxes(prixAvantTaxes, rabaisCourant))
+        {
+            prixApresTaxes = CalculerTaxes();
+        }
+        AjouterProduitsGratuits(prixApresTaxes);
 
-
+        pTransaction.PrixApresRabaisEtTaxes = prixApresTaxes;
 
         return pTransaction;
     }
 
-    public void calculer2Pour1(Transaction pTransaction, RabaisCourant pRabaisCourant)
+    public void calculer2Pour1(RabaisCourant pRabaisCourant)
     {
 
         for(AchatItem itemAchat : pRabaisCourant.getList2Pour1())
         {
-
+            TransactionItem transactionItem = transactionContient(itemAchat);
+            int index = listPourCalcul.indexOf(transactionItem);
+            int quantitee = transactionItem.quantity;
+            if(transactionItem != null)
+            {
+                if(quantitee % 2 == 1)
+                {
+                    quantitee /= 2;
+                    quantitee++;
+                } else {
+                    quantitee /= 2;
+                }
+                listPourCalcul.get(index).quantity = quantitee;
+            }
         }
 
     }
 
     public boolean prixAuDelaDuSeuilExemptionTaxes(double prix, RabaisCourant pRabaisCourant)
     {
-
+        if(pRabaisCourant.getSeuilPasDeTaxes() == -1) { return false; }
+        if(prix > pRabaisCourant.getSeuilPasDeTaxes())
+        {
+            return true;
+        }
         return false;
     }
 
 
-    public double CalculerTaxes(double prixAvantTaxes)
+    public double CalculerTaxes()
     {
         double prixApresTaxes = 0;
 
+        for(TransactionItem transacItem : listPourCalcul)
+        {
+            if(transacItem.achatItem.taxable) { prixApresTaxes += (transacItem.quantity * transacItem.achatItem.prix * 1.15); }
+            else { prixApresTaxes += (transacItem.quantity * transacItem.achatItem.prix); }
+        }
 
         return prixApresTaxes;
     }
 
-    public void AjouterProduitsGratuits(Transaction pTransaction, RabaisCourant pRabaisCourant)
+    public void AjouterProduitsGratuits(double prix)
     {
+        double tranches = rabaisCourant.getTranchesProduitGratuit();
+        if(tranches == -1) { return; }
 
+        AchatItem itemGratuit = rabaisCourant.getProduitGratuit();
+        int nbProduitsGratuis = (int)(prix / tranches);
+
+        TransactionItem itemTransaction = new TransactionItem();
+        itemTransaction.achatItem = itemGratuit;
+        itemTransaction.quantity = nbProduitsGratuis;
+
+        produitsGratuit = itemTransaction;
     }
 
-    private boolean transactionContient(AchatItem item)
+    private TransactionItem transactionContient(AchatItem item)
     {
-        boolean contientAchatItem = false;
-        
 
+        for(TransactionItem itemTransac : listPourCalcul)
+        {
+            if(itemTransac.achatItem.equals(item))
+            {
+                return itemTransac;
+            }
+        }
 
-        return contientAchatItem;
+        return null;
     }
 
 
