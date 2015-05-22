@@ -126,7 +126,8 @@ public class RepositoryProduitFichier implements CRUD<AchatItem> {
 
     public void deleteStorage(){
         File base = context.getFilesDir();
-        deleteFolder(base);
+        File bases = new File(base.getPath() + "/achatItem/");
+        deleteFolder(bases);
     }
 
     public void createStorage(){

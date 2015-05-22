@@ -127,7 +127,8 @@ public class RepositoryTransaction implements CRUD<TransactionItem> {
 
     public void deleteStorage(){
         File base = context.getFilesDir();
-        deleteFolder(base);
+        File bases = new File(base.getPath() + "/Transaction/");
+        deleteFolder(bases);
     }
 
     public void createStorage(){

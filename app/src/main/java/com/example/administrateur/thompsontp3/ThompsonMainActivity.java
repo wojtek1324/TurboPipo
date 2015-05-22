@@ -44,6 +44,8 @@ public class ThompsonMainActivity extends ActionBarActivity {
     public static CRUD<AchatItem> listItems;
     public static ServiceProduit serviceProduit;
 
+    public static RabaisCourant rabaisCourant;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +56,12 @@ public class ThompsonMainActivity extends ActionBarActivity {
         listTransactions = new RepositoryTransaction(this.getApplication());
         listRabais = new RepositoryRabais(this.getApplication());
 
-        listRabais.deleteAll();
-        List<RabaisCourant> lstTestRabais = listRabais.getAll();
 
         if(listRabais.getAll().isEmpty()) {
             listRabais.save(new RabaisCourant());
         }
+
+        rabaisCourant = listRabais.getAll().get(0);
 
         items = new ArrayList<TransactionItem>();
         serviceProduit = new ServiceProduit(listItems);
@@ -147,18 +149,26 @@ public class ThompsonMainActivity extends ActionBarActivity {
 
     public void deuxPour1Click(View v) {
         TransactionItem i = (TransactionItem) v.getTag();
-        List<RabaisCourant> listTestRabais = listRabais.getAll();
+      //  List<RabaisCourant> listTestRabais = listRabais.getAll();
+
+     //   int total = listTestRabais.size();
+
+     //   int bla = listTestRabais.size();
+
         if(((CheckBox) v).isChecked()) {
 
             try {
-                listRabais.getAll().get(0).Ajouter2Pour1(i.achatItem);
+                rabaisCourant.Ajouter2Pour1(i.achatItem);
+                listRabais.save(rabaisCourant);
+
             } catch (RabaisCourant.ItemEstDejaEn2Pour1 itemEstDejaEn2Pour1) {
 
             }
             Toast.makeText(getApplicationContext(), "2 pour 1 maintenent actif", Toast.LENGTH_LONG).show();
         } else {
             try {
-                listRabais.getAll().get(0).Supprimer2pour1(i.achatItem);
+                rabaisCourant.Supprimer2pour1(i.achatItem);
+                listRabais.save(rabaisCourant);
             } catch (RabaisCourant.ItemPasDansLaListe itemPasDansLaListe) {
 
             }

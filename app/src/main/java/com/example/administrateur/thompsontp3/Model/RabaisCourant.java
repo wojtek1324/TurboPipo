@@ -92,5 +92,19 @@ public class RabaisCourant {
         TranchesProduitGratuit = tranchesProduitGratuit;
     }
 
+    public boolean itemEstEn2Pour1(AchatItem itemAchat)
+    {
+        for(AchatItem item : this.getList2Pour1())
+        {
+            if(itemAchat.getId() == item.getId())
+            {
+                return true;
+            }
+        }
+
+
+        return false;
+    }
+
 
 }

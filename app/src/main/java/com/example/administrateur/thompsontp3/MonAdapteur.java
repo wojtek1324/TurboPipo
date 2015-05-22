@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.administrateur.thompsontp3.Model.TransactionItem;
@@ -32,10 +33,20 @@ public class MonAdapteur extends ArrayAdapter<TransactionItem> {
         TransactionItem item = getItem(position);
         row.findViewById(R.id.item_ajout).setTag(item);
         row.findViewById(R.id.item_supprime).setTag(item);
+        row.findViewById(R.id.deuxPourUnChk).setTag(item);
 
         // remplir le layout avec les bonnes valeurs
         TextView prodTV = (TextView) row.findViewById(R.id.item_produit);
         prodTV.setText(item.achatItem.produit);
+
+        CheckBox chkBox2pour1 = (CheckBox) row.findViewById(R.id.deuxPourUnChk);
+
+
+        if(ThompsonMainActivity.rabaisCourant.itemEstEn2Pour1(item.achatItem))
+        {
+            chkBox2pour1.setChecked(true);
+        }
+
 
         TextView qtyTV = (TextView) row.findViewById(R.id.item_quantite);
         qtyTV.setText(String.valueOf(item.quantity));

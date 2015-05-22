@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.administrateur.thompsontp3.Model.AchatItem;
+import com.example.administrateur.thompsontp3.Model.RabaisCourant;
 import com.example.administrateur.thompsontp3.Service.ServiceProduit;
 
 /**
@@ -27,7 +29,11 @@ public class AjouterProduitDialog extends DialogFragment{
         final Button button = (Button)v.findViewById(R.id.add);
         final EditText code = (EditText) v.findViewById(R.id.code);
         final EditText nom = (EditText) v.findViewById(R.id.nom);
+
         final EditText prixProduit = (EditText) v.findViewById(R.id.prixProduit);
+        final CheckBox taxable = (CheckBox) v.findViewById(R.id.taxableChk);
+        final CheckBox deuxPourUn = (CheckBox) v.findViewById(R.id.est2Pour1);
+
 
 
 
@@ -44,6 +50,19 @@ public class AjouterProduitDialog extends DialogFragment{
                 nouveauItem.codeBarre = code.getText().toString();
                 nouveauItem.prix = Double.parseDouble(prixProduit.getText().toString());
                 nouveauItem.produit = nom.getText().toString();
+                nouveauItem.taxable = taxable.isChecked();
+
+                if(deuxPourUn.isChecked())
+                {
+                    try {
+                        ThompsonMainActivity.rabaisCourant.Ajouter2Pour1(nouveauItem);
+                        ThompsonMainActivity.listRabais.save(ThompsonMainActivity.rabaisCourant);
+                    } catch (RabaisCourant.ItemEstDejaEn2Pour1 itemEstDejaEn2Pour1) {
+
+                    }
+
+                }
+
                 try {
                     ThompsonMainActivity.serviceProduit.AjouterProduit(nouveauItem);
                     AjouterProduitDialog.this.dismiss();

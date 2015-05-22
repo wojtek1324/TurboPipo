@@ -39,6 +39,18 @@
             android:ems="10" >
         </EditText>
 
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2 pour 1"
+            android:id="@+id/est2Pour1" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Taxable"
+            android:id="@+id/taxableChk" />
+
         <Button
             android:id="@+id/add"
             style="?android:attr/buttonStyleSmall"

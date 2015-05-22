@@ -128,7 +128,8 @@ public class RepositoryRabais implements CRUD<RabaisCourant>{
 
     public void deleteStorage(){
         File base = context.getFilesDir();
-        deleteFolder(base);
+        File bases = new File(base.getPath() + "/rabais/");
+        deleteFolder(bases);
     }
 
     public void createStorage(){
