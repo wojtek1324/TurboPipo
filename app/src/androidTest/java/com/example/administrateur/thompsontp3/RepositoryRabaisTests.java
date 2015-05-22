@@ -29,8 +29,8 @@ public class RepositoryRabaisTests extends AndroidTestCase {
         repository.deleteAll();
 
         rabaisCourant = new RabaisCourant();
-        AchatItem item2pour1 = new AchatItem("ProduitTest", 25.25, "1234567890");
-        AchatItem itemGratuit = new AchatItem("ProduitTest2", 40.00, "3334567890");
+        item2pour1 = new AchatItem("ProduitTest", 25.25, "1234567890");
+        itemGratuit = new AchatItem("ProduitTest2", 40.00, "3334567890");
         rabaisCourant.Ajouter2Pour1(item2pour1);
         rabaisCourant.setTranchesProduitGratuit(25);
         rabaisCourant.setProduitGratuit(itemGratuit);
@@ -49,11 +49,21 @@ public class RepositoryRabaisTests extends AndroidTestCase {
         long tested = repository.save(rabaisCourant);
         RabaisCourant rabaisCourant2 = repository.getById(tested);
 
+        // Compare le produit gratuit
+        assertEquals(rabaisCourant2.getProduitGratuit().prix, itemGratuit.prix);
+        assertEquals(rabaisCourant2.getProduitGratuit().id, itemGratuit.id);
+        assertEquals(rabaisCourant2.getProduitGratuit().codeBarre, itemGratuit.codeBarre);
+
+        // Compare le produit 2pour1
+        assertEquals(rabaisCourant2.getList2Pour1().get(0).prix, item2pour1.prix);
+        assertEquals(rabaisCourant2.getList2Pour1().get(0).id, item2pour1.id);
+        assertEquals(rabaisCourant2.getList2Pour1().get(0).codeBarre, item2pour1.codeBarre);
+
+        //Compare les seuils et la grosseur de liste 2 pour 1
+        assertEquals(rabaisCourant2.getList2Pour1().size(), 1);
         assertEquals(rabaisCourant2.getSeuilPasDeTaxes(), 100.0);
         assertEquals(rabaisCourant2.getTranchesProduitGratuit(), 25.0);
-        assertEquals(rabaisCourant2.getProduitGratuit(), itemGratuit);
-        assertEquals(rabaisCourant2.getList2Pour1().size(), 1);
-        assertEquals(rabaisCourant2.getList2Pour1().get(0), item2pour1);
+
     }
 
     public void testSaveAndGetAll(){
