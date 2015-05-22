@@ -28,7 +28,8 @@
         android:text="2 pour 1"
         android:id="@+id/deuxPourUnChk"
         android:layout_gravity="center_vertical"
-        android:checked="false" />
+        android:checked="false"
+        android:onClick="deuxPour1Click"/>
 
     <Button
         android:id="@+id/item_ajout"

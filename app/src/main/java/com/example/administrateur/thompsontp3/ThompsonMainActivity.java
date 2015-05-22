@@ -1,9 +1,11 @@
 package com.example.administrateur.thompsontp3;
 
 import com.example.administrateur.thompsontp3.Model.AchatItem;
+import com.example.administrateur.thompsontp3.Model.RabaisCourant;
 import com.example.administrateur.thompsontp3.Model.TransactionItem;
 import com.example.administrateur.thompsontp3.Repo.CRUD;
 import com.example.administrateur.thompsontp3.Repo.RepositoryProduitFichier;
+import com.example.administrateur.thompsontp3.Repo.RepositoryRabais;
 import com.example.administrateur.thompsontp3.Repo.RepositoryTransaction;
 import com.example.administrateur.thompsontp3.Service.ServiceProduit;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -18,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,11 +34,16 @@ import com.example.administrateur.thompsontp3.Model.Monayeur.*;
 
 public class ThompsonMainActivity extends ActionBarActivity {
     //public static List<AchatItem> listItems = new ArrayList<>();
-    public static ServiceProduit serviceProduit;
+
     CRUD<TransactionItem> listTransactions;
-    public static CRUD<AchatItem> listItems;
+
     MonAdapteur adapter;
     List<TransactionItem> items;
+
+    public static CRUD<RabaisCourant> listRabais;
+    public static CRUD<AchatItem> listItems;
+    public static ServiceProduit serviceProduit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,18 +52,17 @@ public class ThompsonMainActivity extends ActionBarActivity {
 
         listItems = new RepositoryProduitFichier(this.getApplication());
         listTransactions = new RepositoryTransaction(this.getApplication());
+        listRabais = new RepositoryRabais(this.getApplication());
+
+        listRabais.deleteAll();
+        List<RabaisCourant> lstTestRabais = listRabais.getAll();
+
+        if(listRabais.getAll().isEmpty()) {
+            listRabais.save(new RabaisCourant());
+        }
 
         items = new ArrayList<TransactionItem>();
         serviceProduit = new ServiceProduit(listItems);
-
-      /*  TransactionItem itemTest = new TransactionItem();
-      /  itemTest.achatItem = new AchatItem();
-        itemTest.achatItem.prix = 12345323.51;
-        itemTest.achatItem.produit = "Biscuits";
-        itemTest.achatItem.codeBarre = "850006000012";
-        itemTest.quantity = 2;
-        items.add(itemTest);
-        listItems.save(itemTest.achatItem); */
 
 
         adapter = new MonAdapteur(ThompsonMainActivity.this, items);
@@ -136,6 +143,27 @@ public class ThompsonMainActivity extends ActionBarActivity {
         }
         adapter.notifyDataSetChanged();
         calculerPrixTotal();
+    }
+
+    public void deuxPour1Click(View v) {
+        TransactionItem i = (TransactionItem) v.getTag();
+        List<RabaisCourant> listTestRabais = listRabais.getAll();
+        if(((CheckBox) v).isChecked()) {
+
+            try {
+                listRabais.getAll().get(0).Ajouter2Pour1(i.achatItem);
+            } catch (RabaisCourant.ItemEstDejaEn2Pour1 itemEstDejaEn2Pour1) {
+
+            }
+            Toast.makeText(getApplicationContext(), "2 pour 1 maintenent actif", Toast.LENGTH_LONG).show();
+        } else {
+            try {
+                listRabais.getAll().get(0).Supprimer2pour1(i.achatItem);
+            } catch (RabaisCourant.ItemPasDansLaListe itemPasDansLaListe) {
+
+            }
+            Toast.makeText(getApplicationContext(), "2 pour 1 Inactif", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void calculerPrixTotal() {
