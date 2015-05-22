@@ -10,6 +10,15 @@ import java.util.List;
 
 public class RabaisCourant {
 
+    public Long id;
+
+    public Long getId()
+    {
+        return id;
+    }
+
+    public void setId(long id) {this.id = id; }
+
     public static class ItemEstDejaEn2Pour1 extends Exception {}
 
     public static  class ItemPasDansLaListe extends Exception {}
