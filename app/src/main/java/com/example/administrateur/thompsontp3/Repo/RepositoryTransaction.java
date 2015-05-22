@@ -31,7 +31,8 @@ public class RepositoryTransaction implements CRUD<TransactionItem> {
         synchronized (classe) {
             List<TransactionItem> res = new ArrayList<TransactionItem>();
             File base = context.getFilesDir();
-            for (File f : base.listFiles()){
+            File bases = new File(base.getPath() + "/Transaction/");
+            for (File f : bases.listFiles()){
                 try{
                     //System.out.println("File is "+f.getName());
                     String content = FileUtils.readFileToString(f);
@@ -59,7 +60,7 @@ public class RepositoryTransaction implements CRUD<TransactionItem> {
             String serialise = gson.toJson(a);
             File base = context.getFilesDir();
             try {
-                FileUtils.writeStringToFile(new File(base, a.getId()+".TransactionItem"), serialise);
+                FileUtils.writeStringToFile(new File(base,"Transaction/" + a.getId()+".TransactionItem"), serialise);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -88,9 +89,9 @@ public class RepositoryTransaction implements CRUD<TransactionItem> {
             String content;
             try {
                 File base = context.getFilesDir();
-                File f = new File(base,id+".TransactionItem");
+                File f = new File(base,"Transaction/" +id+".TransactionItem");
                 if (!f.exists()) return null;
-                content = FileUtils.readFileToString(new File(base,id+".TransactionItem"));
+                content = FileUtils.readFileToString(new File(base,"Transaction/" +id+".TransactionItem"));
                 TransactionItem a = gson.fromJson(content, classe);
                 return a;
             } catch (IOException e) {
@@ -102,7 +103,7 @@ public class RepositoryTransaction implements CRUD<TransactionItem> {
     public void deleteOne(TransactionItem a) {
         synchronized (classe) {
             File base = context.getFilesDir();
-            File f = new File(base, a.getId()+".TransactionItem");
+            File f = new File(base,"Transaction/" + a.getId()+".TransactionItem");
             f.delete();
         }
     }
@@ -131,7 +132,8 @@ public class RepositoryTransaction implements CRUD<TransactionItem> {
 
     public void createStorage(){
         File base = context.getFilesDir();
-        base.mkdirs();
+        File bases = new File(base.getPath() + "/Transaction/");
+        bases.mkdirs();
     }
 
     private static void deleteFolder(File folder) {

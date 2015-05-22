@@ -32,7 +32,8 @@ public class RepositoryRabais implements CRUD<RabaisCourant>{
         synchronized (classe) {
             List<RabaisCourant> res = new ArrayList<RabaisCourant>();
             File base = context.getFilesDir();
-            for (File f : base.listFiles()){
+            File bases = new File(base.getPath() + "/rabais/");
+            for (File f : bases.listFiles()){
                 try{
                     //System.out.println("File is "+f.getName());
                     String content = FileUtils.readFileToString(f);
@@ -60,7 +61,7 @@ public class RepositoryRabais implements CRUD<RabaisCourant>{
             String serialise = gson.toJson(a);
             File base = context.getFilesDir();
             try {
-                FileUtils.writeStringToFile(new File(base, a.getId()+".RabaisCourant"), serialise);
+                FileUtils.writeStringToFile(new File(base,"rabais/" + a.getId()+".rabaisCourant"), serialise);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -89,9 +90,9 @@ public class RepositoryRabais implements CRUD<RabaisCourant>{
             String content;
             try {
                 File base = context.getFilesDir();
-                File f = new File(base,id+".RabaisCourant");
+                File f = new File(base,"rabais/" +id+".rabaisCourant");
                 if (!f.exists()) return null;
-                content = FileUtils.readFileToString(new File(base,id+".RabaisCourant"));
+                content = FileUtils.readFileToString(new File(base,"rabais/" +id+".rabaisCourant"));
                 RabaisCourant a = gson.fromJson(content, classe);
                 return a;
             } catch (IOException e) {
@@ -103,7 +104,7 @@ public class RepositoryRabais implements CRUD<RabaisCourant>{
     public void deleteOne(RabaisCourant a) {
         synchronized (classe) {
             File base = context.getFilesDir();
-            File f = new File(base, a.getId()+".RabaisCourant");
+            File f = new File(base, "rabais/" +a.getId()+".rabaisCourant");
             f.delete();
         }
     }
@@ -132,7 +133,8 @@ public class RepositoryRabais implements CRUD<RabaisCourant>{
 
     public void createStorage(){
         File base = context.getFilesDir();
-        base.mkdirs();
+        File bases = new File(base.getPath() + "/rabais/");
+        bases.mkdirs();
     }
 
     private static void deleteFolder(File folder) {

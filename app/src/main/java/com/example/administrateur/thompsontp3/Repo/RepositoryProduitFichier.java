@@ -30,7 +30,8 @@ public class RepositoryProduitFichier implements CRUD<AchatItem> {
         synchronized (classe) {
             List<AchatItem> res = new ArrayList<AchatItem>();
             File base = context.getFilesDir();
-            for (File f : base.listFiles()){
+            File bases = new File(base.getPath() + "/achatItem/");
+            for (File f : bases.listFiles()){
                 try{
                     //System.out.println("File is "+f.getName());
                     String content = FileUtils.readFileToString(f);
@@ -58,7 +59,7 @@ public class RepositoryProduitFichier implements CRUD<AchatItem> {
             String serialise = gson.toJson(a);
             File base = context.getFilesDir();
             try {
-                FileUtils.writeStringToFile(new File(base, a.getId()+".achatItem"), serialise);
+                FileUtils.writeStringToFile(new File(base, "achatItem/" + a.getId()+".achatItem"), serialise);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -87,9 +88,9 @@ public class RepositoryProduitFichier implements CRUD<AchatItem> {
             String content;
             try {
                 File base = context.getFilesDir();
-                File f = new File(base,id+".achatItem");
+                File f = new File(base,"achatItem/" +id+".achatItem");
                 if (!f.exists()) return null;
-                content = FileUtils.readFileToString(new File(base,id+".achatItem"));
+                content = FileUtils.readFileToString(new File(base,"achatItem/" +id+".achatItem"));
                 AchatItem a = gson.fromJson(content, classe);
                 return a;
             } catch (IOException e) {
@@ -101,7 +102,7 @@ public class RepositoryProduitFichier implements CRUD<AchatItem> {
     public void deleteOne(AchatItem a) {
         synchronized (classe) {
             File base = context.getFilesDir();
-            File f = new File(base, a.getId()+".achatItem");
+            File f = new File(base, "achatItem/" +a.getId()+".achatItem");
             f.delete();
         }
     }
@@ -130,7 +131,8 @@ public class RepositoryProduitFichier implements CRUD<AchatItem> {
 
     public void createStorage(){
         File base = context.getFilesDir();
-        base.mkdirs();
+        File bases = new File(base.getPath() + "/achatItem/");
+        bases.mkdirs();
     }
 
     private static void deleteFolder(File folder) {
