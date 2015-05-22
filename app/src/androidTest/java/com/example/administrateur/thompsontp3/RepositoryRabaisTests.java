@@ -1,4 +1,4 @@
-package com.example.administrateur.thompsontp3.MonayeurTest;
+package com.example.administrateur.thompsontp3;
 
 import android.test.AndroidTestCase;
 
@@ -49,8 +49,8 @@ public class RepositoryRabaisTests extends AndroidTestCase {
         long tested = repository.save(rabaisCourant);
         RabaisCourant rabaisCourant2 = repository.getById(tested);
 
-        assertEquals(rabaisCourant2.getSeuilPasDeTaxes(), 100);
-        assertEquals(rabaisCourant2.getTranchesProduitGratuit(), 25);
+        assertEquals(rabaisCourant2.getSeuilPasDeTaxes(), 100.0);
+        assertEquals(rabaisCourant2.getTranchesProduitGratuit(), 25.0);
         assertEquals(rabaisCourant2.getProduitGratuit(), itemGratuit);
         assertEquals(rabaisCourant2.getList2Pour1().size(), 1);
         assertEquals(rabaisCourant2.getList2Pour1().get(0), item2pour1);
