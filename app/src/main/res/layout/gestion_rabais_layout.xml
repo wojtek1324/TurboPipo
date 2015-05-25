@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:text="Produit Gratuit:"
+                android:layout_width="wrap_content"
+                android:layout_height="40sp"
+                />
+
+
+            <EditText
+                android:id="@+id/codeBarrePG"
+                android:hint="@string/dialogue_hint_codebarre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+
+                ><requestFocus /></EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                android:text="Seuil pour produit gratuit:"
+                android:layout_width="wrap_content"
+                android:layout_height="40sp" />
+
+            <EditText
+                android:id="@+id/seuilPG"
+                android:hint="Seuil produit gratuit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal">
+            </EditText>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:text="Seuil pas de taxes:"
+                android:layout_width="wrap_content"
+                android:layout_height="40sp" />
+
+            <EditText
+                android:id="@+id/seuilPasDeTaxes"
+                android:hint="Seuil pas de taxes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal">
+            </EditText>
+
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/updateRabais"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Appliquer"
+            />
+
+
+    </LinearLayout>
+</LinearLayout>

@@ -40,7 +40,7 @@ public class AjouterProduitDialog extends DialogFragment{
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                if(contientCodeBarre(code.getText().toString()) || code.getText().length() == 0)
+                if(contientCodeBarre(code.getText().toString()) || code.getText().length() == 0 || prixProduit.getText().length() == 0)
                 {
 
                     return;

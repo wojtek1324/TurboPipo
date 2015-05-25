@@ -80,11 +80,9 @@ public class ThompsonMainActivity extends ActionBarActivity {
                 if (adapter.getCount() == 0)
                     return;
 
-                for (TransactionItem itemTransac : items) {
-                    listTransactions.save(itemTransac);
-                }
-
-                Toast.makeText(getApplicationContext(), "Transaction sauvegardé avec succes", Toast.LENGTH_LONG).show();
+                DialogFragment ajouterDialogue = PayerDialog.newInstance();
+                //ajouterDialogue.setContext(getApplicationContext());
+                ajouterDialogue.show(getFragmentManager(), "dialog");
             }
         });
 
@@ -108,6 +106,12 @@ public class ThompsonMainActivity extends ActionBarActivity {
         });
 
 
+    }
+
+    public void gererRabaisClick(View v)
+    {
+        DialogFragment ajouterDialogue = UpdateRabaisDialog.newInstance();
+        ajouterDialogue.show(getFragmentManager(), "dialog");
     }
 
     public void scannerInterogator() {
