@@ -33,17 +33,19 @@ public class PayerDialog extends DialogFragment {
         // asd asda oisdh asio haiodh ioah hasdfio hadsiof hash oih asio hfdoih aio fshd foihas iodfhao sidfh oasi dfhio
         // asd asda oisdh asio haiodh ioah hasdfio hadsiof hash oih asio hfdoih aio fshd foihas iodfhao sidfh oasi dfhio
         // asd asda oisdh asio haiodh ioah hasdfio hadsiof hash oih asio hfdoih aio fshd foihas iodfhao sidfh oasi dfhio
-        adapter = new PayerAdapteur(getActivity().getBaseContext(), billets);
+        billets = new ArrayList<ElementDeListe>();
+        adapter = new PayerAdapteur(getActivity(), billets);
         ListView list = (ListView) v.findViewById(R.id.liste_billets);
         list.setAdapter(adapter);
-        billets = new ArrayList<ElementDeListe>();
+
 
         for (Money money : Money.values()) {
             ElementDeListe item = new ElementDeListe();
             item.nomArgent = money.name();
             item.quantitee = 0;
             item.valeurArgent = money.value();
-            billets.add(item);
+            adapter.add(item);
+
         }
 
         adapter.notifyDataSetChanged();

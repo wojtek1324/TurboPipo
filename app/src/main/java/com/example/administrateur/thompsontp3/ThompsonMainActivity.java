@@ -1,6 +1,7 @@
 package com.example.administrateur.thompsontp3;
 
 import com.example.administrateur.thompsontp3.Model.AchatItem;
+import com.example.administrateur.thompsontp3.Model.ElementDeListe;
 import com.example.administrateur.thompsontp3.Model.RabaisCourant;
 import com.example.administrateur.thompsontp3.Model.TransactionItem;
 import com.example.administrateur.thompsontp3.Repo.CRUD;
@@ -80,7 +81,8 @@ public class ThompsonMainActivity extends ActionBarActivity {
                 if (adapter.getCount() == 0)
                     return;
 
-                DialogFragment ajouterDialogue = PayerDialog.newInstance();
+
+                PayerDialog ajouterDialogue = (PayerDialog)PayerDialog.newInstance();
                 //ajouterDialogue.setContext(getApplicationContext());
                 ajouterDialogue.show(getFragmentManager(), "dialog");
             }

@@ -42,7 +42,7 @@ public class PayerAdapteur extends ArrayAdapter<ElementDeListe> {
         nomElement.setText(item.nomArgent);
 
         TextView quantitee = (TextView) row.findViewById(R.id.quantiteeArgent);
-        quantitee.setText(item.quantitee);
+        quantitee.setText(String.valueOf(item.quantitee));
 
 
         row.setTag(item);
