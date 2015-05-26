@@ -3,6 +3,7 @@ package com.example.administrateur.thompsontp3;
 import com.example.administrateur.thompsontp3.Model.AchatItem;
 import com.example.administrateur.thompsontp3.Model.ElementDeListe;
 import com.example.administrateur.thompsontp3.Model.RabaisCourant;
+import com.example.administrateur.thompsontp3.Model.Transaction;
 import com.example.administrateur.thompsontp3.Model.TransactionItem;
 import com.example.administrateur.thompsontp3.Repo.CRUD;
 import com.example.administrateur.thompsontp3.Repo.RepositoryProduitFichier;
@@ -47,6 +48,8 @@ public class ThompsonMainActivity extends ActionBarActivity {
 
     public static RabaisCourant rabaisCourant;
 
+    public static Transaction transactionCourante;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +84,8 @@ public class ThompsonMainActivity extends ActionBarActivity {
                 if (adapter.getCount() == 0)
                     return;
 
-
+                transactionCourante = new Transaction();
+                transactionCourante.Transactions = items;
                 PayerDialog ajouterDialogue = (PayerDialog)PayerDialog.newInstance();
                 //ajouterDialogue.setContext(getApplicationContext());
                 ajouterDialogue.show(getFragmentManager(), "dialog");
@@ -180,6 +184,7 @@ public class ThompsonMainActivity extends ActionBarActivity {
             }
             Toast.makeText(getApplicationContext(), "2 pour 1 Inactif", Toast.LENGTH_LONG).show();
         }
+      //  adapter.notifyDataSetChanged();
     }
 
     public void calculerPrixTotal() {

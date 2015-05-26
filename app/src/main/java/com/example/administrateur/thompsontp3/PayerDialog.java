@@ -7,9 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.administrateur.thompsontp3.Model.ElementDeListe;
 import com.example.administrateur.thompsontp3.Model.Monayeur.Money;
+import com.example.administrateur.thompsontp3.Model.Monayeur.ThompsonChange;
+import com.example.administrateur.thompsontp3.Model.Monayeur.ThompsonMachine;
+import com.example.administrateur.thompsontp3.Model.Monayeur.ThompsonReg;
+import com.example.administrateur.thompsontp3.Model.RabaisCourant;
+import com.example.administrateur.thompsontp3.Service.ServicePrixTotal;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +31,8 @@ public class PayerDialog extends DialogFragment {
     List<ElementDeListe> billets;
 
     Context context;
+    ThompsonReg cashRegister = new ThompsonReg();
+    ThompsonMachine machine = new ThompsonMachine();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,14 +40,22 @@ public class PayerDialog extends DialogFragment {
 
 
         final View v = inflater.inflate(R.layout.payer_layout, container, false);
-        // asd asda oisdh asio haiodh ioah hasdfio hadsiof hash oih asio hfdoih aio fshd foihas iodfhao sidfh oasi dfhio
-        // asd asda oisdh asio haiodh ioah hasdfio hadsiof hash oih asio hfdoih aio fshd foihas iodfhao sidfh oasi dfhio
-        // asd asda oisdh asio haiodh ioah hasdfio hadsiof hash oih asio hfdoih aio fshd foihas iodfhao sidfh oasi dfhio
+
         billets = new ArrayList<ElementDeListe>();
         adapter = new PayerAdapteur(getActivity(), billets);
         ListView list = (ListView) v.findViewById(R.id.liste_billets);
         list.setAdapter(adapter);
 
+        TextView totalAvecRabais = (TextView) v.findViewById(R.id.totalApresRabaisTaxes);
+
+        ServicePrixTotal servicePrixTotal = new ServicePrixTotal(ThompsonMainActivity.transactionCourante, ThompsonMainActivity.rabaisCourant);
+        ThompsonMainActivity.transactionCourante = servicePrixTotal.AppliquerRabaisEtTaxes(ThompsonMainActivity.transactionCourante);
+
+        double prixApresRabaisTaxes = ThompsonMainActivity.transactionCourante.PrixApresRabaisEtTaxes;
+
+        prixApresRabaisTaxes = machine.Arrondir(prixApresRabaisTaxes);
+
+        totalAvecRabais.setText(String.format("%1$,.2f", prixApresRabaisTaxes) + "$");
 
         for (Money money : Money.values()) {
             ElementDeListe item = new ElementDeListe();
@@ -51,6 +69,10 @@ public class PayerDialog extends DialogFragment {
         adapter.notifyDataSetChanged();
 
         return v;
+    }
+
+    public void PayerLaTransaction(View view) {
+
     }
 
 
