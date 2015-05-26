@@ -37,6 +37,9 @@ public class ServicePrixTotal {
         }
         AjouterProduitsGratuits(prixApresTaxes);
 
+        prixApresTaxes = correctionDeDecimals(prixApresTaxes);
+
+        pTransaction.Transactions.add(produitsGratuit);
         pTransaction.PrixApresRabaisEtTaxes = prixApresTaxes;
 
         return pTransaction;
@@ -119,6 +122,17 @@ public class ServicePrixTotal {
         }
 
         return null;
+    }
+
+    private Double correctionDeDecimals(Double doubleAajuster)
+    {
+        double retour = doubleAajuster;
+        retour = retour * 100;
+        retour = Math.round(retour);
+        retour = retour /100;
+
+        return retour;
+
     }
 
 
