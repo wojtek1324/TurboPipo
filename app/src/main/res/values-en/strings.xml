@@ -12,8 +12,18 @@
     <string name="dialogue_hint_prix">Price</string>
     <string name="dialogue_hint_codebarre">Barcode</string>
     <string name="dialogue_bouton_ajout">Add</string>
+    <string name="deuxpourun">2 for 1</string>
+    <string name="taxable">Taxable</string>
+
+    <string name="dialogueGestionRabais_PG">Free Product:</string>
+    <string name="dialogueGestionRabais_SeuilPG">Free product threshold:</string>
+    <string name="dialogueGestionRabais_HintSeuilPG">Free product threshold</string>
+    <string name="dialogueGestionRabais_SeuilPDT">Tax free threshold:</string>
+    <string name="dialogueGestionRabais_HintSeuilPDT">Tax free threshold</string>
+    <string name="dialogueGestionRabais_btnAppliquer">Apply</string>
 
     <string name="main_bouton_plusproduit">+Product</string>
     <string name="main_bouton_payer">Pay</string>
+    <string name="main_bouton_rabais">Discount</string>
 
 </resources>

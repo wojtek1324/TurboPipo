@@ -25,7 +25,7 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:text="2 pour 1"
+        android:text="@string/deuxpourun"
         android:id="@+id/deuxPourUnChk"
         android:layout_gravity="center_vertical"
         android:checked="false"

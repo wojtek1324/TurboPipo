@@ -42,13 +42,13 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2 pour 1"
+            android:text="@string/deuxpourun"
             android:id="@+id/est2Pour1" />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Taxable"
+            android:text="@string/taxable"
             android:id="@+id/taxableChk" />
 
         <Button
