@@ -41,9 +41,9 @@ public class PayerDialog extends DialogFragment {
 
         for (Money money : Money.values()) {
             ElementDeListe item = new ElementDeListe();
-            item.nomArgent = money.name();
+            item.nomArgent = money.pretty();
             item.quantitee = 0;
-            item.valeurArgent = money.value();
+            item.money = money;
             adapter.add(item);
 
         }
