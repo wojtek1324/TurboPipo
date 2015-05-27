@@ -26,4 +26,7 @@
     <string name="main_bouton_payer">Payer</string>
     <string name="main_bouton_rabais">Rabais</string>
 
+    <string name="toast_2champrequis">Les deux champs pour le produit gratuit doivent être remplit</string>
+    <string name="toast_seuilPositif">Les seuils doivent être positifs</string>
+
 </resources>

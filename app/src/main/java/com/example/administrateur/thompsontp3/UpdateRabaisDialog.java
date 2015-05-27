@@ -34,25 +34,25 @@ public class UpdateRabaisDialog extends DialogFragment{
 
                 if((code.getText() == null && seuilPG.getText() != null)||
                         (code.getText() != null && seuilPG.getText() == null)) {
-                    Toast.makeText(getActivity().getBaseContext(), "Les deux champs pour le produit gratuit doivent être remplit", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getBaseContext(), "@string/toast_2champrequis", Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 if(seuilPasTaxes.getText().length() != 0 ) {
                     double seuilPTParse = Double.parseDouble(seuilPasTaxes.getText().toString());
-                    if(seuilPTParse < 0) { Toast.makeText(getActivity().getBaseContext(), "Les seuils doivent être positifs", Toast.LENGTH_LONG).show();
+                    if(seuilPTParse < 0) { Toast.makeText(getActivity().getBaseContext(), "@string/toast_seuilPositif", Toast.LENGTH_LONG).show();
                         return; }
 
                     //Seuil pas de taxes:
                     ThompsonMainActivity.rabaisCourant.setSeuilPasDeTaxes(seuilPTParse);
 
                 } else {
-                    ThompsonMainActivity.rabaisCourant.setSeuilPasDeTaxes(-1);
+                    ThompsonMainActivity.rabaisCourant.setSeuilPasDeTaxes(Double.MAX_VALUE);
                 }
 
                 if(seuilPG.getText().length() != 0 && itemAyantCeCodeBarre(code.getText().toString()) != null) {
                     double seuilPGPrase = Double.parseDouble(seuilPG.getText().toString());
-                    if(seuilPGPrase <= 0) { Toast.makeText(getActivity().getBaseContext(), "Les seuils doivent être positifs", Toast.LENGTH_LONG).show();
+                    if(seuilPGPrase <= 0) { Toast.makeText(getActivity().getBaseContext(), "@string/toast_seuilPositif", Toast.LENGTH_LONG).show();
                         return; }
 
                     //Produits gratuits:

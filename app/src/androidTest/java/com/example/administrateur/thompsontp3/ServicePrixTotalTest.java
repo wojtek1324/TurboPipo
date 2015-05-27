@@ -119,6 +119,83 @@ public class ServicePrixTotalTest extends AndroidTestCase {
         Assert.assertEquals(resultat, false);
     }
 
+    public void testPrixApresRabaisAvecItems2pour1pair() throws RabaisCourant.ItemEstDejaEn2Pour1 {
+        achatItemTests = new AchatItem("Porduit1", 3.25, "1234567", true);
+
+        transactionItemTests = new TransactionItem(achatItemTests, 8);
+        transactionTests.Transactions.add(transactionItemTests);
+
+        rabaisCourantTests.Ajouter2Pour1(achatItemTests);
+
+        servicePrixTotalTests.AppliquerRabaisEtTaxes(transactionTests);
+
+        // 3.25 * 8 / 2 * 1.15
+        Assert.assertEquals(transactionTests.PrixApresRabaisEtTaxes,  14.95);
+
+    }
+
+    public void testPrixApresRabaisAvecItems2pour1impair() throws RabaisCourant.ItemEstDejaEn2Pour1 {
+        achatItemTests = new AchatItem("Porduit1", 5.00, "1234567", true);
+
+        transactionItemTests = new TransactionItem(achatItemTests, 5);
+        transactionTests.Transactions.add(transactionItemTests);
+
+        rabaisCourantTests.Ajouter2Pour1(achatItemTests);
+
+        servicePrixTotalTests.AppliquerRabaisEtTaxes(transactionTests);
+
+        // 3 * 5 * 1.15
+        Assert.assertEquals(transactionTests.PrixApresRabaisEtTaxes,  17.25);
+    }
+
+    public void testEgalAuSeuilPasDeTaxe()
+    {
+        achatItemTests = new AchatItem("Porduit1", 5.00, "1234567", true);
+
+        transactionItemTests = new TransactionItem(achatItemTests, 5);
+        transactionTests.Transactions.add(transactionItemTests);
+
+        rabaisCourantTests.setSeuilPasDeTaxes(25);
+
+        servicePrixTotalTests.AppliquerRabaisEtTaxes(transactionTests);
+
+        //Vu que le total est exactement le même que le seuil pas de taxe, les taxes sont appliqués.
+
+        Assert.assertEquals(transactionTests.PrixApresRabaisEtTaxes,  28.75);
+    }
+
+    public void testSeuilPasDeTaxeSimple()
+    {
+        achatItemTests = new AchatItem("Porduit1", 5.00, "1234567", true);
+
+        transactionItemTests = new TransactionItem(achatItemTests, 5);
+        transactionTests.Transactions.add(transactionItemTests);
+
+        rabaisCourantTests.setSeuilPasDeTaxes(24);
+
+        servicePrixTotalTests.AppliquerRabaisEtTaxes(transactionTests);
+
+        Assert.assertEquals(transactionTests.PrixApresRabaisEtTaxes,  25.0);
+    }
+
+    public void testQuantiteProduitGratuitRecue()
+    {
+        achatItemTests = new AchatItem("Porduit1", 5.00, "1234567", true);
+        AchatItem achatItemTests2 = new AchatItem("ProduitGratuit", 3.00, "1234567", true);
+
+        transactionItemTests = new TransactionItem(achatItemTests, 5);
+        transactionTests.Transactions.add(transactionItemTests);
+
+
+        rabaisCourantTests.setProduitGratuit(achatItemTests2);
+        rabaisCourantTests.setTranchesProduitGratuit(5);
+
+        servicePrixTotalTests.AppliquerRabaisEtTaxes(transactionTests);
+
+        Assert.assertEquals(transactionTests.Transactions.size(), 2);
+    }
+
+
 
 
 

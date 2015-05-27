@@ -26,4 +26,8 @@
     <string name="main_bouton_payer">Pay</string>
     <string name="main_bouton_rabais">Discount</string>
 
+    <string name="toast_2champrequis">Both fields for the free product must be filled</string>
+
+    <string name="toast_seuilPositif">The threshold must be positive</string>
+
 </resources>
