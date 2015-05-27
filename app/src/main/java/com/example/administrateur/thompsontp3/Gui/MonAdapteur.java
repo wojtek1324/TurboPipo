@@ -1,4 +1,4 @@
-package com.example.administrateur.thompsontp3;
+package com.example.administrateur.thompsontp3.Gui;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,8 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.administrateur.thompsontp3.Model.TransactionItem;
+import com.example.administrateur.thompsontp3.R;
+import com.example.administrateur.thompsontp3.ThompsonMainActivity;
 
 import java.util.List;
 

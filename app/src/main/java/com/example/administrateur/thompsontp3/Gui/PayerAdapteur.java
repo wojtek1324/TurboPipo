@@ -1,4 +1,4 @@
-package com.example.administrateur.thompsontp3;
+package com.example.administrateur.thompsontp3.Gui;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.administrateur.thompsontp3.Model.ElementDeListe;
 import com.example.administrateur.thompsontp3.Model.Monayeur.Money;
 import com.example.administrateur.thompsontp3.Model.TransactionItem;
+import com.example.administrateur.thompsontp3.R;
 
 import java.util.List;
 

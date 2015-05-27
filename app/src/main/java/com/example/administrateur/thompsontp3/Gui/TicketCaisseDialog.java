@@ -1,4 +1,4 @@
-package com.example.administrateur.thompsontp3;
+package com.example.administrateur.thompsontp3.Gui;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.administrateur.thompsontp3.Model.TransactionItem;
+import com.example.administrateur.thompsontp3.R;
 import com.example.administrateur.thompsontp3.Service.ServicePrixTotal;
+import com.example.administrateur.thompsontp3.ThompsonMainActivity;
 
 /**
  * Created by 1263287 on 2015-05-26.

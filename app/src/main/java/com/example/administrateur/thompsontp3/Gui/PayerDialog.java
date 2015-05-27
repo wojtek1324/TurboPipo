@@ -1,4 +1,4 @@
-package com.example.administrateur.thompsontp3;
+package com.example.administrateur.thompsontp3.Gui;
 
 import android.app.DialogFragment;
 import android.content.Context;
@@ -12,13 +12,11 @@ import android.widget.TextView;
 
 import com.example.administrateur.thompsontp3.Model.ElementDeListe;
 import com.example.administrateur.thompsontp3.Model.Monayeur.Money;
-import com.example.administrateur.thompsontp3.Model.Monayeur.ThompsonChange;
 import com.example.administrateur.thompsontp3.Model.Monayeur.ThompsonMachine;
 import com.example.administrateur.thompsontp3.Model.Monayeur.ThompsonReg;
-import com.example.administrateur.thompsontp3.Model.RabaisCourant;
+import com.example.administrateur.thompsontp3.R;
 import com.example.administrateur.thompsontp3.Service.ServicePrixTotal;
-
-import org.w3c.dom.Text;
+import com.example.administrateur.thompsontp3.ThompsonMainActivity;
 
 import java.util.ArrayList;
 import java.util.List;

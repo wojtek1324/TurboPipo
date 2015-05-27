@@ -1,7 +1,10 @@
 package com.example.administrateur.thompsontp3;
 
+import com.example.administrateur.thompsontp3.Gui.AjouterProduitDialog;
+import com.example.administrateur.thompsontp3.Gui.MonAdapteur;
+import com.example.administrateur.thompsontp3.Gui.PayerDialog;
+import com.example.administrateur.thompsontp3.Gui.UpdateRabaisDialog;
 import com.example.administrateur.thompsontp3.Model.AchatItem;
-import com.example.administrateur.thompsontp3.Model.ElementDeListe;
 import com.example.administrateur.thompsontp3.Model.RabaisCourant;
 import com.example.administrateur.thompsontp3.Model.Transaction;
 import com.example.administrateur.thompsontp3.Model.TransactionItem;

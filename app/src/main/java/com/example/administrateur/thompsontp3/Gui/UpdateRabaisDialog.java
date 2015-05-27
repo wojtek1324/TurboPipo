@@ -1,8 +1,7 @@
-package com.example.administrateur.thompsontp3;
+package com.example.administrateur.thompsontp3.Gui;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.administrateur.thompsontp3.Model.AchatItem;
+import com.example.administrateur.thompsontp3.R;
+import com.example.administrateur.thompsontp3.ThompsonMainActivity;
 
 /**
  * Created by 1263287 on 2015-05-25.
