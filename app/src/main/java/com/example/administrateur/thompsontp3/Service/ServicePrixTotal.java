@@ -113,6 +113,8 @@ public class ServicePrixTotal {
     private TransactionItem transactionContient(AchatItem item)
     {
 
+        if(item == null) { return null; }
+
         for(TransactionItem itemTransac : listPourCalcul)
         {
             if(itemTransac.achatItem.equals(item))

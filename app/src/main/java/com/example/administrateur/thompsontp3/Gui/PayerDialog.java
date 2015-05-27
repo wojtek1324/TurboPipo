@@ -85,7 +85,9 @@ public class PayerDialog extends DialogFragment {
                 }
 
                 //TODO Pop dialog Ticket de caisse:
+                double monnaieTotal = calculerTotal();
                 TicketCaisseDialog ticketCaisseDialog = new TicketCaisseDialog();
+                ticketCaisseDialog.setMonnaieRecu(monnaieTotal);
                 ticketCaisseDialog.show(getFragmentManager(), "dialog");
             }
         });

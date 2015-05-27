@@ -18,6 +18,9 @@ import com.example.administrateur.thompsontp3.ThompsonMainActivity;
  */
 public class TicketCaisseDialog extends DialogFragment {
 
+    public double monnaieDonne;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,9 +56,11 @@ public class TicketCaisseDialog extends DialogFragment {
             ticketString += "Vous avez recue " + String.valueOf(servicePrixTotal.produitsGratuit.quantity) + " " + servicePrixTotal.produitsGratuit.achatItem.produit + " gratuitement! \n \n";
         }
 
-        ticketString += "Monnaie donnée: " + "\n";
+        ticketString += "Monnaie donnée: " + String.format("%1$,.2f", monnaieDonne) + "$ \n";
 
-        ticketString += "Monnaie rendue: ";
+        double monnaieRendu = monnaieDonne - ThompsonMainActivity.transactionCourante.PrixApresRabaisEtTaxes;
+
+        ticketString += "Monnaie rendue: " + String.format("%1$,.2f", monnaieRendu) + "$ \n";
 
         Log.i("Ticket caisse", ticketString);
 
@@ -63,6 +68,10 @@ public class TicketCaisseDialog extends DialogFragment {
         ticketText.setText(ticketString);
 
         return v;
+    }
+
+    public void setMonnaieRecu(double MonnaieDonne) {
+        monnaieDonne = MonnaieDonne;
     }
 
     String espaces(int nbEspaces) {
