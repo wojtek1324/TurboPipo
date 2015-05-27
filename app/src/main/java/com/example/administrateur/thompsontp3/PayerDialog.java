@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class PayerDialog extends DialogFragment {
     Context context;
     ThompsonReg cashRegister = new ThompsonReg();
     ThompsonMachine machine = new ThompsonMachine();
+    double prixApresRabaisTaxes;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,7 +44,7 @@ public class PayerDialog extends DialogFragment {
         final View v = inflater.inflate(R.layout.payer_layout, container, false);
 
         billets = new ArrayList<ElementDeListe>();
-        adapter = new PayerAdapteur(getActivity(), billets);
+        adapter = new PayerAdapteur(v.getContext(), billets);
         ListView list = (ListView) v.findViewById(R.id.liste_billets);
         list.setAdapter(adapter);
 
@@ -51,7 +53,7 @@ public class PayerDialog extends DialogFragment {
         ServicePrixTotal servicePrixTotal = new ServicePrixTotal(ThompsonMainActivity.transactionCourante, ThompsonMainActivity.rabaisCourant);
         ThompsonMainActivity.transactionCourante = servicePrixTotal.AppliquerRabaisEtTaxes(ThompsonMainActivity.transactionCourante);
 
-        double prixApresRabaisTaxes = ThompsonMainActivity.transactionCourante.PrixApresRabaisEtTaxes;
+        prixApresRabaisTaxes = ThompsonMainActivity.transactionCourante.PrixApresRabaisEtTaxes;
 
         prixApresRabaisTaxes = machine.Arrondir(prixApresRabaisTaxes);
 
@@ -63,16 +65,34 @@ public class PayerDialog extends DialogFragment {
             item.quantitee = 0;
             item.money = money;
             adapter.add(item);
-
         }
 
         adapter.notifyDataSetChanged();
 
+        Button calculerTotalBtn = (Button) v.findViewById(R.id.calculerTotalBtn);
+        calculerTotalBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculerTotal();
+            }
+        });
+
+        Button payerFactureBtn = (Button) v.findViewById(R.id.payerLaTransaction);
+        payerFactureBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(calculerTotal() < prixApresRabaisTaxes) {
+                    return;
+                }
+
+                //TODO Pop dialog Ticket de caisse:
+                TicketCaisseDialog ticketCaisseDialog = new TicketCaisseDialog();
+                ticketCaisseDialog.show(getFragmentManager(), "dialog");
+            }
+        });
+
         return v;
-    }
-
-    public void PayerLaTransaction(View view) {
-
     }
 
 
@@ -80,8 +100,17 @@ public class PayerDialog extends DialogFragment {
         return new PayerDialog();
     }
 
-    public void setContext(Context context) {
-        this.context = context;
+    public double calculerTotal() {
+        double total = 0;
+
+        for(int i = 0; i < adapter.getCount(); i++) {
+            ElementDeListe item = adapter.getItem(i);
+            total += item.quantitee * item.money.value();
+        }
+
+        TextView totalCalcule = (TextView) this.getView().findViewById(R.id.totalPaye);
+        totalCalcule.setText(String.format("%1$,.2f", total) + "$");
+        return total;
     }
 
 }

@@ -86,7 +86,7 @@ public class ThompsonMainActivity extends ActionBarActivity {
 
                 transactionCourante = new Transaction();
                 transactionCourante.Transactions = items;
-                PayerDialog ajouterDialogue = (PayerDialog)PayerDialog.newInstance();
+                DialogFragment ajouterDialogue = PayerDialog.newInstance();
                 //ajouterDialogue.setContext(getApplicationContext());
                 ajouterDialogue.show(getFragmentManager(), "dialog");
             }

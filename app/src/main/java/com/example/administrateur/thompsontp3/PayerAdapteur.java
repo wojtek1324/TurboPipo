@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.administrateur.thompsontp3.Model.ElementDeListe;
@@ -30,7 +31,7 @@ public class PayerAdapteur extends ArrayAdapter<ElementDeListe> {
     public View getView(int position, View convertView, ViewGroup parent)
     {
         // transformer le fichier XML en objets Java : gonfler
-        LayoutInflater inflater = ((Activity) getContext()).getLayoutInflater();
+        LayoutInflater inflater = LayoutInflater.from(this.getContext());
         View row = inflater.inflate(R.layout.liste_argent_layout, parent, false);
 
 
@@ -44,8 +45,38 @@ public class PayerAdapteur extends ArrayAdapter<ElementDeListe> {
         TextView quantitee = (TextView) row.findViewById(R.id.quantiteeArgent);
         quantitee.setText(String.valueOf(item.quantitee));
 
+        Button btnPlusUn = (Button) row.findViewById(R.id.ajout_piece);
+        btnPlusUn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ElementDeListe i = (ElementDeListe) v.getTag();
+
+                i.quantitee++;
+
+                notifyDataSetChanged();
+            }
+        });
+
+
+        Button btnMoinUn = (Button) row.findViewById(R.id.supprimer_piece);
+
+        btnMoinUn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ElementDeListe i = (ElementDeListe) v.getTag();
+
+                if(i.quantitee != 0) {
+                    i.quantitee--;
+                    notifyDataSetChanged();
+                }
+            }
+        });
 
         row.setTag(item);
         return row;
     }
+
+
+
+
 }

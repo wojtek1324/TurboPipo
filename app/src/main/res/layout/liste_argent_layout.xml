@@ -23,7 +23,6 @@
             android:text="+"
             android:layout_margin="10sp"
             android:background="@android:color/holo_green_light"
-            android:onClick="plusUnePiece"
             />
 
         <Button
@@ -34,6 +33,5 @@
             android:text="-"
             android:layout_margin="10sp"
             android:background="@android:color/holo_red_light"
-            android:onClick="moinUnePiece"
             />
 </LinearLayout>
