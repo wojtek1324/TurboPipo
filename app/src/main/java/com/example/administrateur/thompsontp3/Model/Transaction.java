@@ -22,7 +22,9 @@ public class Transaction {
         double total = 0;
         for(TransactionItem item : Transactions)
         {
-            total += item.achatItem.prix * item.quantity;
+            if(item.quantity != 0) {
+                total += item.achatItem.prix * item.quantity;
+            }
         }
         return total;
     }

@@ -7,11 +7,41 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="Monnaie courante: "
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent" />
+
+        <TextView
+            android:id="@+id/totalPaye"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent" />
+
+        <TextView
+
+            android:text="Total avec rabais et taxes: "
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent" />
+
         <TextView
             android:id="@+id/totalApresRabaisTaxes"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+        <Button
+            android:text="Calculer total"
+            android:id="@+id/calculerTotalBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            />
 
         <Button
             android:id="@+id/payerLaTransaction"

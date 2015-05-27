@@ -2,6 +2,7 @@ package com.example.administrateur.thompsontp3.Gui;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,13 +33,15 @@ public class TicketCaisseDialog extends DialogFragment {
         ticketString += "\n";
 
         for(TransactionItem itemTransaction : ThompsonMainActivity.transactionCourante.Transactions) {
-            ticketString += itemTransaction.achatItem.produit + espaces(30) + (itemTransaction.quantity) + espaces(30) + String.format("%1$,.2f",itemTransaction.quantity*itemTransaction.achatItem.prix) + "$";
-            if(ThompsonMainActivity.rabaisCourant.itemEstEn2Pour1(itemTransaction.achatItem)) {
-                ticketString += espaces(5);
-                ticketString += "2 pour 1";
+            if(itemTransaction.quantity != 0) {
+                ticketString += itemTransaction.achatItem.produit + espaces(30) + (itemTransaction.quantity) + espaces(30) + String.format("%1$,.2f", itemTransaction.quantity * itemTransaction.achatItem.prix) + "$";
+                if (ThompsonMainActivity.rabaisCourant.itemEstEn2Pour1(itemTransaction.achatItem)) {
+                    ticketString += espaces(5);
+                    ticketString += "2 pour 1";
+                }
+                ticketString += "\n";
+                ticketString += "\n";
             }
-            ticketString += "\n";
-            ticketString += "\n";
 
         }
 
@@ -54,6 +57,7 @@ public class TicketCaisseDialog extends DialogFragment {
 
         ticketString += "Monnaie rendue: ";
 
+        Log.i("Ticket caisse", ticketString);
 
         TextView ticketText = (TextView) v.findViewById(R.id.ticket_text);
         ticketText.setText(ticketString);
